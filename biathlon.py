@@ -58,7 +58,7 @@ def target_to_string(target):
         return "* "
     elif is_closed(target):
         return "0 "
-    else: return None
+    else: return
 
 def targets_to_string(targets):
     # Konverterar 0 1 till mer representativa symboler för användaren.
@@ -71,11 +71,11 @@ def targets_to_string(targets):
 def view_targets(targets):
     # Gör tavlan mer läsbart för användaren.
     print(f"""
-    0 1 2 3 4
+    1 2 3 4 5
     
     {targets_to_string(targets)}
     """)
-    return None
+    
 
 def random_hit():
     # 50/50 chans att vi träffar målet.
@@ -94,3 +94,36 @@ def shoot(targets, target):
         else: return "Hit on closed target"
     else: return "miss"
     
+def parse_target(string):
+    if string.isnumeric():
+        # Om strängen är numerisk, så konverterar vi den till en int.
+        int_target = int(string)
+        if int_target <= 5 and int_target >= 1:
+            return int_target - 1 
+    return None
+       
+
+## game
+
+def game():
+    # initiera tavlan och antal skott
+    ts = new_targets()
+    i = 1
+    splash()
+    print("You got 5 shots")
+
+    # While loopen körs tills i-värdet är 6. Värdet blir 6 efter 5 skott/körningar. 
+    while i <= 5:
+        view_targets(ts)
+        user_input = parse_target(input(f"shot nr {i} at: "))
+
+        # Kontrollerar att användaren ger ett godtyckligt värde, annars får användaren
+        # prova igen.
+        # Om värdet inte är None så skjuter vi skottet på det målet som användaren vill. 
+        if user_input != None:
+            print(shoot(ts, user_input))
+            i += 1
+
+    print(f"You hit {hits(ts)} of 5 targets")
+
+game()
