@@ -58,7 +58,7 @@ def target_to_string(target):
         return "* "
     elif is_closed(target):
         return "0 "
-    else: return None
+    else: return
 
 def targets_to_string(targets):
     # Konverterar 0 1 till mer representativa symboler för användaren.
@@ -75,7 +75,7 @@ def view_targets(targets):
     
     {targets_to_string(targets)}
     """)
-    return None
+    
 
 def random_hit():
     # 50/50 chans att vi träffar målet.
@@ -94,5 +94,11 @@ def shoot(targets, target):
         else: return "Hit on closed target"
     else: return "miss"
     
-t = new_targets()
-view_targets(t)
+def parse_target(string):
+    if string.isnumeric():
+        # Om strängen är numerisk, så konverterar vi den till en int.
+        int_target = int(string)
+        if int_target <= 5 and int_target >= 1:
+            return int_target - 1 
+       
+
