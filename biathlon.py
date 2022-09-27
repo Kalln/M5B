@@ -71,7 +71,7 @@ def targets_to_string(targets):
 def view_targets(targets):
     # Gör tavlan mer läsbart för användaren.
     print(f"""
-    0 1 2 3 4
+    1 2 3 4 5
     
     {targets_to_string(targets)}
     """)
@@ -94,3 +94,5 @@ def shoot(targets, target):
         else: return "Hit on closed target"
     else: return "miss"
     
+t = new_targets()
+view_targets(t)
