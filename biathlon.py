@@ -18,6 +18,10 @@ def open():
 def closed():
     return 1
 
+# is_open & is_closed ger antingen True eller False beroende på om 
+# målet är öppet eller stängd. Är målet öppet och is_open() ropas
+# så ger funktionen värdet "True" tillbaka.
+
 def is_open(target):
     if target == open():
         return True
@@ -29,6 +33,7 @@ def is_closed(target):
     else: return False
 
 def new_targets():
+    # skapar fem nya element i en lista som representerar våra tavlor.
     new_target_list = []
     for _ in range(5):
         new_target_list.append(open())
@@ -41,6 +46,7 @@ def close_target(target, targets):
     return targets
 
 def hits(targets):
+    # Kollar hur många hits vi har totalt i tavlan
     i = 0
     for target in targets:
         if is_closed(target):
@@ -55,12 +61,15 @@ def target_to_string(target):
     else: return None
 
 def targets_to_string(targets):
+    # Konverterar 0 1 till mer representativa symboler för användaren.
+    # funktionen används av "view_targets()"
     str_targets = ""
     for target in targets:
         str_targets = str_targets + f"{target_to_string(target)}"
     return str_targets
 
 def view_targets(targets):
+    # Gör tavlan mer läsbart för användaren.
     print(f"""
     0 1 2 3 4
     
@@ -69,6 +78,7 @@ def view_targets(targets):
     return None
 
 def random_hit():
+    # 50/50 chans att vi träffar målet.
     if randint(0, 1) == 1:
         return True
     else: return False
@@ -77,7 +87,6 @@ def shoot(targets, target):
     # Kolla först om skottet träffar. Om nej, var det miss (inget sker)
     # Om ja, kontrollerar vi om tavlan är öppen eller stängd.
     # och returnera värdet allt eftersom.
-    # 
     if random_hit():
         if is_open(targets[target]):
             close_target(target, targets)
